@@ -1,3 +1,28 @@
+fn rgb(r: i32, g: i32, b: i32) -> String {
+  format!("{}{}{}",convert(r),convert(g),convert(b))
+}
+
+fn convert(mut dec: i32) -> String {
+    let cash = dec;
+    let mut result = String::from(""); 
+    if dec <0 {return String::from("00")} 
+    if dec > 255 {dec = 255;}
+    let s: String = String::from("0123456789ABCDEF");  
+  	loop {
+  	   
+        let quotient = dec /16; 
+		let index = (dec - 16 * quotient) as usize; 
+        result = format!("{}{}", s.chars().nth(index.try_into().unwrap()).unwrap(), result);
+      	if quotient < 1 {
+        	break;
+        }
+        dec = quotient;
+    }
+    if cash <=15 {result = format!("{}{}","0".to_string(), result);}
+  	result.to_string()
+}
+
+
 fn first_word(s: &str) -> Vec<String> {  
     let mut pasrsed_string = String::from(s); 
     println!("{}", s.len());
